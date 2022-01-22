@@ -1,30 +1,41 @@
+import { useState, useEffect } from "react";
 import MeetupList from "../components/meetups/MeetUpList";
 
-const DUMMY_DATA = [
-  {
-    id: 'm2',
-    title: 'This the first meetup',
-    image:
-      'https://images.freeimages.com/images/small-previews/ce9/city-life-1172828.jpg',
-    address: 'Meetup Street 90, 126789 Meetup city',
-    description:
-      'This is the first, amazing meetup which you definitely should not miss',
-  },
-  {
-    id: 'm56',
-    title: 'This the second meetup',
-    image: 'https://assets.unenvironment.org/2020-02/sustainable-cities.jpg',
-    address: 'Meetup Street 180, 126789 Meetup city',
-    description:
-      'This is the second, amazing meetup which you definitely should not miss',
-  },
-];
-
 function AllMeetupsPage() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [loadedMeetUps, setLoadedMeetUps] = useState([])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetch('https://students-corner-7520a.firebaseio.com/meetups.json').then(response => {
+      return response.json()
+    }).then(data => {
+      const meetups = []
+
+      for (const key in data) {
+        const meetup = {
+          id: key,
+          ...data[key]
+        }
+        meetups.push(meetup)
+      }
+      setIsLoading(false)
+      setLoadedMeetUps(meetups)
+    })
+
+  }, [])
+
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    )
+  }
   return (
     <section>
       <h1>All Meetups</h1>
-      <MeetupList meetups={DUMMY_DATA}/>
+      <MeetupList meetups={loadedMeetUps} />
     </section>
   );
 }
