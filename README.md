@@ -1,4 +1,26 @@
-# Getting Started with Create React App
+# GatherPod
+
+## Project setup
+
+### How to setup and run GatherPod
+
+1. Use `git clone git@github.com:EugeneDevv/GatherPod.git` to clone this project.
+
+2. Navigate into the project directory.
+
+3. Easy, just run
+
+```sh
+    npm install
+```
+
+  then
+
+```sh
+    npm start
+```
+
+4. A live demo of the project is available [here](https://gatherpod.herokuapp.com/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
