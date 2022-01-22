@@ -4,8 +4,10 @@ import MainNavigation from './components/layout/MainNavigation';
 import AllMeetupsPage from './pages/AllMeetups';
 import FavoritesPage from './pages/Favorites';
 import NewMeetupPage from './pages/NewMeetup';
+import {FavoritesContextProvider} from './store/favorites-context';
 function App() {
   return (
+    <FavoritesContextProvider >
     <Router>
       <MainNavigation />
       <Layout>
@@ -15,7 +17,8 @@ function App() {
           <Route path='/favorites' element={<FavoritesPage />} />
         </Routes>
       </Layout>
-    </Router>
+      </Router>
+      </FavoritesContextProvider>
   );
 }
 
